@@ -1,4 +1,4 @@
-import { v4 as uuid } from "uuid";
+import {v4 as uuid} from "uuid";
 import log from '../logger/logger.js';
 
 let users = [];
@@ -17,22 +17,15 @@ export const postUsers = (req, res) => {
     users.push({...user, id: uuid()});
 
     res.send("User created successfully.");
-} ;
+};
 
-//export const postUsers = (req, res) => {
-//    console.info("POST request to endpoint '/users' received.");
-//
-//    // Создаём пользователя
-//    const user = req.body;
-//    const newUser = { ...user, id: uuid() }; // Генерируем уникальный ID
-//    users.push(newUser); // Добавляем пользователя в массив
-//
-//    // Отправляем ответ в формате JSON
-//    res.status(201).json({
-//        message: "User created successfully",
-//        userId: newUser.id // Возвращаем созданный ID
-//    });
-//};
+
+export const deleteUsers = (req, res) =>{
+    users = [];
+
+    res.send("DB cleaned successfully.");
+}
+
 
 export const getUserById = (req, res) => {
     log.info("GET request to endpoint '/users/id' received.");
@@ -63,13 +56,13 @@ export const patchUserById = (req, res) => {
 
     const foundUser = users.find((user) => user.id === userID);
 
-    if(newFirstName) {
+    if (newFirstName) {
         foundUser.firstName = newFirstName;
     }
-    if(newLastName) {
+    if (newLastName) {
         foundUser.lastName = newLastName;
     }
-    if(newAge) {
+    if (newAge) {
         foundUser.age = newAge;
     }
 
